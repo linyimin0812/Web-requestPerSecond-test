@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="zh-CN">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>ECharts</title>
+
+    <!-- 引入 echarts.js -->
+    <script type="text/javascript" src="./js/echarts.min.js"></script>
+    <!-- 引入jquery.js -->
+    <script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div align="center">
+        <div id="timeForTest" style="width: 800px;height:500px;"></div>
+        <div id="failedRequests" style="width: 800px;height:500px;"></div>
+        <div id="requestPerSecond" style="width: 800px;height:500px;"></div>
+        <div id="userTimePerRequest" style="width: 800px;height:500px;"></div>
+        <div id="serverTimePerRequest" style="width: 800px;height:500px;"></div>
+    </div>
+    <script type="text/javascript">
+        var timeForTest = echarts.init(document.getElementById('timeForTest')); 
+        var failedRequests = echarts.init(document.getElementById('failedRequests'));
+        var requestPerSecond = echarts.init(document.getElementById('requestPerSecond'));
+        var userTimePerRequest = echarts.init(document.getElementById('userTimePerRequest'));
+        var serverTimePerRequest = echarts.init(document.getElementById('serverTimePerRequest'));
+        // 显示标题，图例和空的坐标轴
+        
+        // timeForTest.showLoading(); //数据加载完之前先显示一段简单的loading动画
+        // requestPerSecond.showLoading(); //数据加载完之前先显示一段简单的loading动画
+        // userTimePerRequest.showLoading(); //数据加载完之前先显示一段简单的loading动画
+        // serverTimePerRequest.showLoading(); //数据加载完之前先显示一段简单的loading动画
+        $.ajax({
+            type: "get",
+            async: false, //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+            url: "http://localhost:8000/result", //请求发送到TestServlet处
+            data: {},
+            dataType: "json", //返回数据形式为json
+            success: function (result) {
+                //请求成功时执行该函数内容，result即为服务器返回的json对象
+                if (result) {
+                    timeForTest.hideLoading(); //隐藏加载动画
+                    timeForTest.setOption({
+                        title: {
+                            text: '完成全部请求测试所需时间(s)'
+                        },
+                        color: ['#3398DB'],
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow'
+                            }
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: result.concurrencyLevel,
+                            axisTick: {
+                                alignWithLabel: true
+                            }
+                        },
+                        yAxis: [
+                            {
+                                type: 'value'
+                            }
+                        ],
+                        series: [{
+                            name: '完成全部请求测试所需时间(s)',
+                            type: 'bar',
+                            barWidth: '60%',
+                            data: result.timeForTest
+                        }]
+                    });
+
+                    failedRequests.hideLoading(); //隐藏加载动画
+                    failedRequests.setOption({
+                        title: {
+                            text: '错误请求数'
+                        },
+                        color: ['#3398DB'],
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow'
+                            }
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: result.concurrencyLevel,
+                            axisTick: {
+                                alignWithLabel: true
+                            }
+                        },
+                        yAxis: [
+                            {
+                                type: 'value'
+                            }
+                        ],
+                        series: [{
+                            name: '错误请求数',
+                            type: 'bar',
+                            barWidth: '60%',
+                            data: result.failedRequests
+                        }]
+                    });
+
+                    requestPerSecond.setOption({
+                        title: {
+                            text: '吞吐量(RPS)'
+                        },
+                        color: ['#3398DB'],
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow'
+                            }
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: result.concurrencyLevel,
+                            axisTick: {
+                                alignWithLabel: true
+                            }
+                        },
+                        yAxis: [
+                            {
+                                type: 'value'
+                            }
+                        ],
+                        series: [{
+                            name: '吞吐量(RPS)',
+                            type: 'bar',
+                            barWidth: '60%',
+                            data: result.requestPerSecond
+                        }]
+                    });
+
+                    userTimePerRequest.setOption({
+                        title: {
+                            text: '用户平均请求等待时间(ms)'
+                        },
+                        color: ['#3398DB'],
+                        tooltip: {
+                           trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow'
+                            }
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: result.concurrencyLevel,
+                            axisTick: {
+                                alignWithLabel: true
+                            }
+                        },
+                        yAxis: [
+                            {
+                                type: 'value'
+                            }
+                        ],
+                        series: [{
+                            name: '用户平均请求等待时间(ms)',
+                            type: 'bar',
+                            barWidth: '60%',
+                            data: result.userTimePerRequest
+                        }]
+                    });
+
+                    serverTimePerRequest.setOption({
+                        title: {
+                            text: '服务器平均请求等待时间(ms)'
+                        },
+                        color: ['#3398DB'],
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow'
+                            }
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: result.concurrencyLevel,
+                            axisTick: {
+                                alignWithLabel: true
+                            }
+                        },
+                        yAxis: [
+                            {
+                                type: 'value'
+                            }
+                        ],
+                        series: [{
+                            name: '服务器平均请求等待时间(ms)',
+                            type: 'bar',
+                            barWidth: '60%',
+                            data: result.serverTimePerRequest
+                        }]
+                    });
+                }
+
+            },
+            error: function (errorMsg) {
+                //请求失败时执行该函数
+                alert("图表请求数据失败!");
+                timeForTest.hideLoading();
+            }
+        })
+    </script>
+
+</body>
+
+</html>
