@@ -1,0 +1,27 @@
+{
+  "name": "web-requestpersecond-test",
+  "version": "1.0.0",
+  "description": "对网站进行压力测试，并将测试结果可视化",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lym152898/Web-requestPerSecond-test.git"
+  },
+  "keywords": [
+    "node",
+    "ab",
+    "echart"
+  ],
+  "author": "linyimin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lym152898/Web-requestPerSecond-test/issues"
+  },
+  "homepage": "https://github.com/lym152898/Web-requestPerSecond-test#readme",
+  "devDependencies": {
+    "express": "^4.16.2"
+  }
+}
