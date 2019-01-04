@@ -1,7 +1,7 @@
 var express = require("express");
 var parse = require("./parse");
 var app = express();
-var dirPath = "F://项目/test/linux/";
+var dirPath = "/home/linyimin/practice/Web-requestPerSecond-test/linux/result";
 // 允许跨域访问
 app.all("*", function(req, res, next){
     res.header("Access-Control-Allow-Origin", "*");
@@ -10,16 +10,16 @@ app.all("*", function(req, res, next){
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 })
+
+app.use(express.static('public'))
 app.use("/result", function(req, res){
     var result = {};
-    var serviceName = req.query.serviceName || "questionBase";
-    var path = dirPath + serviceName + "/";
-    result.concurrencyLevel = parse.getConcurrencyLevel(path);
-    result.timeForTest = parse.getTimeForTest(path);
-    result.failedRequests = parse.getFailedRequests(path);
-    result.requestPerSecond = parse.getRequestPerSecond(path);
-    result.userTimePerRequest = parse.getUserTimePerRequest(path);
-    result.serverTimePerRequest = parse.getServerTimePerRequest(path);
+    result.concurrencyLevel = parse.getConcurrencyLevel(dirPath);
+    result.timeForTest = parse.getTimeForTest(dirPath);
+    result.failedRequests = parse.getFailedRequests(dirPath);
+    result.requestPerSecond = parse.getRequestPerSecond(dirPath);
+    result.userTimePerRequest = parse.getUserTimePerRequest(dirPath);
+    result.serverTimePerRequest = parse.getServerTimePerRequest(dirPath);
     res.json(result);
 });
 

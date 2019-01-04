@@ -191,42 +191,42 @@
                         }]
                     });
 
-                    serverTimePerRequest.setOption({
-                        title: {
-                            text: '服务器平均请求等待时间(ms)'
-                        },
-                        color: ['#3398DB'],
-                        tooltip: {
-                            trigger: 'axis',
-                            axisPointer: {
-                                type: 'shadow'
-                            }
-                        },
-                        grid: {
-                            left: '3%',
-                            right: '4%',
-                            bottom: '3%',
-                            containLabel: true
-                        },
-                        xAxis: {
-                            type: 'category',
-                            data: result.concurrencyLevel,
-                            axisTick: {
-                                alignWithLabel: true
-                            }
-                        },
-                        yAxis: [
-                            {
-                                type: 'value'
-                            }
-                        ],
-                        series: [{
-                            name: '服务器平均请求等待时间(ms)',
-                            type: 'bar',
-                            barWidth: '60%',
-                            data: result.serverTimePerRequest
-                        }]
-                    });
+                    // serverTimePerRequest.setOption({
+                    //     title: {
+                    //         text: '服务器平均请求等待时间(ms)'
+                    //     },
+                    //     color: ['#3398DB'],
+                    //     tooltip: {
+                    //         trigger: 'axis',
+                    //         axisPointer: {
+                    //             type: 'shadow'
+                    //         }
+                    //     },
+                    //     grid: {
+                    //         left: '3%',
+                    //         right: '4%',
+                    //         bottom: '3%',
+                    //         containLabel: true
+                    //     },
+                    //     xAxis: {
+                    //         type: 'category',
+                    //         data: result.concurrencyLevel,
+                    //         axisTick: {
+                    //             alignWithLabel: true
+                    //         }
+                    //     },
+                    //     yAxis: [
+                    //         {
+                    //             type: 'value'
+                    //         }
+                    //     ],
+                    //     series: [{
+                    //         name: '服务器平均请求等待时间(ms)',
+                    //         type: 'bar',
+                    //         barWidth: '60%',
+                    //         data: result.serverTimePerRequest
+                    //     }]
+                    // });
                 }
 
             },

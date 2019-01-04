@@ -71,14 +71,14 @@ function parseAll(dirPath) {
             timeForTest[i] = temp[1];
             failedRequests[i] = temp[3];
             requestPerSecond[i] = temp[8];
-            userTimePerRequest[i] = temp[9];
+            userTimePerRequest[i] = temp[6];
             serverTimePerRequest[i] = temp[10];
         }else{
             concurrencyLevel[i] = temp[0];
             timeForTest[i] = temp[1];
             failedRequests[i] = temp[3];
             requestPerSecond[i] = temp[6];
-            userTimePerRequest[i] = temp[7];
+            userTimePerRequest[i] = temp[6];
             serverTimePerRequest[i] = temp[8];
         }
     }

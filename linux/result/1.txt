@@ -1,0 +1,43 @@
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking openapi.10jqka.com.cn (be patient).....done
+
+
+Server Software:        nginx
+Server Hostname:        openapi.10jqka.com.cn
+Server Port:            443
+SSL/TLS Protocol:       TLSv1.2,ECDHE-RSA-AES128-GCM-SHA256,2048,128
+
+Document Path:          /databank/v1/market_change?date=20180202
+Document Length:        47 bytes
+
+Concurrency Level:      1
+Time taken for tests:   11.011 seconds
+Complete requests:      50
+Failed requests:        0
+Total transferred:      21878 bytes
+HTML transferred:       2350 bytes
+Requests per second:    4.54 [#/sec] (mean)
+Time per request:       220.228 [ms] (mean)
+Time per request:       220.228 [ms] (mean, across all concurrent requests)
+Transfer rate:          1.94 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:      118  135  43.8    125     411
+Processing:    73   85  13.8     80     140
+Waiting:       72   85  13.8     80     140
+Total:        193  220  45.0    206     488
+
+Percentage of the requests served within a certain time (ms)
+  50%    206
+  66%    214
+  75%    218
+  80%    225
+  90%    252
+  95%    265
+  98%    488
+  99%    488
+ 100%    488 (longest request)
